@@ -46,21 +46,15 @@ If Isaac Lab is installed in a conda or venv environment that is already active,
    cd RL_robots
    ```
 
-2. **Set the robot path.** The file `B1_Training/source/B1_Training/B1_Training/tasks/manager_based/b1_training/B1.py` loads the model from an absolute path, the one of the machine it was developed on:
-
-   ```python
-   usd_path= "/home/inf-04/B1/b1.usd",
-   ```
-
-   Replace it with the path of the `B1/b1.usd` file in your copy of the repository, for example `/home/user/RL_robots/B1/b1.usd`. Without this step, training and play cannot find the robot.
-
-3. Install the package in editable mode, using the Python interpreter of Isaac Lab:
+2. Install the package in editable mode, using the Python interpreter of Isaac Lab:
 
    ```bash
    $ISAACLAB/isaaclab.sh -p -m pip install -e B1_Training/source/B1_Training
    ```
 
-4. Check the installation with a very short training run (2 iterations, 16 environments):
+   The robot model is found automatically: `B1.py` loads `B1/b1.usd` relative to the root of the repository, so the `B1/` and `B1_Training/` folders must stay next to each other.
+
+3. Check the installation with a very short training run (2 iterations, 16 environments):
 
    ```bash
    cd B1_Training
