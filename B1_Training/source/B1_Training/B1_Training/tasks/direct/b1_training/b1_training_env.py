@@ -15,13 +15,13 @@ from isaaclab.envs import DirectRLEnv
 from isaaclab.sim.spawners.from_files import GroundPlaneCfg, spawn_ground_plane
 from isaaclab.utils.math import sample_uniform
 
-from .b1_training_env_cfg import B10508EnvCfg
+from .b1_training_env_cfg import B1TrainingEnvCfg
 
 
-class B10508Env(DirectRLEnv):
-    cfg: B10508EnvCfg
+class B1TrainingEnv(DirectRLEnv):
+    cfg: B1TrainingEnvCfg
 
-    def __init__(self, cfg: B10508EnvCfg, render_mode: str | None = None, **kwargs):
+    def __init__(self, cfg: B1TrainingEnvCfg, render_mode: str | None = None, **kwargs):
         super().__init__(cfg, render_mode, **kwargs)
 
         self._cart_dof_idx, _ = self.robot.find_joints(self.cfg.cart_dof_name)

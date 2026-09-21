@@ -13,7 +13,7 @@ from isaaclab.utils import configclass
 
 
 @configclass
-class B10508EnvCfg(DirectRLEnvCfg):
+class B1TrainingEnvCfg(DirectRLEnvCfg):
     # env
     decimation = 2
     episode_length_s = 5.0

@@ -14,10 +14,10 @@ from . import agents
 
 gym.register(
     id="Template-B1-Training-Direct-v0",
-    entry_point=f"{__name__}.b1_training_env:B10508Env",
+    entry_point=f"{__name__}.b1_training_env:B1TrainingEnv",
     disable_env_checker=True,
     kwargs={
-        "env_cfg_entry_point": f"{__name__}.b1_training_env_cfg:B10508EnvCfg",
+        "env_cfg_entry_point": f"{__name__}.b1_training_env_cfg:B1TrainingEnvCfg",
         "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:PPORunnerCfg",
         "skrl_amp_cfg_entry_point": f"{agents.__name__}:skrl_amp_cfg.yaml",
         "skrl_cfg_entry_point": f"{agents.__name__}:skrl_ppo_cfg.yaml",
