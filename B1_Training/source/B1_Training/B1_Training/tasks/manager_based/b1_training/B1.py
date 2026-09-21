@@ -2,11 +2,15 @@ import isaaclab.sim as sim_utils
 from isaaclab.actuators import ActuatorNetMLPCfg, DCMotorCfg, ImplicitActuatorCfg
 from isaaclab.assets.articulation import ArticulationCfg
 import os
+from pathlib import Path
 from math import pi
+
+# Modello del robot: file B1/b1.usd nella radice della repo (le cartelle B1/ e B1_Training/ sono affiancate).
+_B1_USD = Path(__file__).resolve().parents[7] / "B1" / "b1.usd"
 
 B1_CFG = ArticulationCfg(
     spawn=sim_utils.UsdFileCfg(
-        usd_path= "/home/inf-04/B1/b1.usd",
+        usd_path=str(_B1_USD),
         activate_contact_sensors=True,
         rigid_props=sim_utils.RigidBodyPropertiesCfg(
             disable_gravity=False,
@@ -45,7 +49,7 @@ B1_CFG = ArticulationCfg(
     # ==========================================================================================
     # VERSIONE PRECEDENTE (commentata, NON cancellata, per riferimento/confronto): un unico
     # gruppo con limiti di sforzo/velocità UNIFORMI (45 / 21.0) per tutti i giunti - non
-    # corrispondono ai valori reali dell'URDF (/home/inf-04/B1/b1.urdf), che sono diversi per
+    # corrispondono ai valori reali dell'URDF (B1/b1.urdf), che sono diversi per
     # tipo di giunto e per il calf in particolare molto più alti (140 Nm reali contro i 45
     # configurati qui, meno di un terzo).
     # --------------------------------------------------------------------------------------------
@@ -63,7 +67,7 @@ B1_CFG = ArticulationCfg(
     # ==========================================================================================
 
     # VERSIONE NUOVA (attiva): tre gruppi separati (hip, thigh, calf), con `effort_limit` e
-    # `velocity_limit` presi direttamente dall'URDF ufficiale Unitree (/home/inf-04/B1/b1.urdf,
+    # `velocity_limit` presi direttamente dall'URDF ufficiale Unitree (B1/b1.urdf,
     # tag <limit effort=... velocity=...> di ciascun giunto - valori fisici misurati, non
     # tunabili). `stiffness`/`damping` invece NON sono nell'URDF (sono parametri di controllo,
     # non specifiche hardware): qui usiamo 150/5, vicini al valore ufficiale Unitree per il B2
@@ -112,7 +116,7 @@ B1_CFG = ArticulationCfg(
 )
 """Configuration of Unitree B1 using DC-Motor actuator model in Position Control.
 
-Limiti di sforzo/velocità per giunto presi dall'URDF ufficiale (/home/inf-04/B1/b1.urdf).
+Limiti di sforzo/velocità per giunto presi dall'URDF ufficiale (B1/b1.urdf).
 Stiffness/damping (150/5) allineati al riferimento ufficiale Unitree B2 (stiffness=160,
 damping=5 in unitree_rl_lab), scalati leggermente al ribasso dato che il B1 ha motori meno
 potenti del B2.
