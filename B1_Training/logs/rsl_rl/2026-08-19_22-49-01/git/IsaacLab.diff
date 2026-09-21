@@ -1,0 +1,45 @@
+--- git commit ---
+090aed18163b2194d5551c7919f7539283677743
+
+
+--- git status ---
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   source/isaaclab_assets/isaaclab_assets/robots/unitree.py
+	modified:   source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py
+
+no changes added to commit (use "git add" and/or "git commit -a") 
+
+
+--- git diff ---
+diff --git a/source/isaaclab_assets/isaaclab_assets/robots/unitree.py b/source/isaaclab_assets/isaaclab_assets/robots/unitree.py
+index ff7685a3c..cdd530301 100644
+--- a/source/isaaclab_assets/isaaclab_assets/robots/unitree.py
++++ b/source/isaaclab_assets/isaaclab_assets/robots/unitree.py
+@@ -68,7 +68,7 @@ UNITREE_A1_CFG = ArticulationCfg(
+             max_depenetration_velocity=1.0,
+         ),
+         articulation_props=sim_utils.ArticulationRootPropertiesCfg(
+-            enabled_self_collisions=False, solver_position_iteration_count=4, solver_velocity_iteration_count=0
++            enabled_self_collisions=True, solver_position_iteration_count=4, solver_velocity_iteration_count=0
+         ),
+     ),
+     init_state=ArticulationCfg.InitialStateCfg(
+diff --git a/source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py b/source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py
+index 02857c63d..28cd7959c 100644
+--- a/source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py
++++ b/source/isaaclab_tasks/isaaclab_tasks/direct/quadcopter/quadcopter_env.py
+@@ -149,7 +149,9 @@ class QuadcopterEnv(DirectRLEnv):
+ 
+     def _pre_physics_step(self, actions: torch.Tensor):
+         self._actions = actions.clone().clamp(-1.0, 1.0)
++        #spinta antigravità (per la f1tenth non ci serve)
+         self._thrust[:, 0, 2] = self.cfg.thrust_to_weight * self._robot_weight * (self._actions[:, 0] + 1.0) / 2.0
++        #inclinazione per curvare (per la f1tenth per curvare usiamo lo sterzo)
+         self._moment[:, 0, :] = self.cfg.moment_scale * self._actions[:, 1:]
+ 
+     def _apply_action(self):
