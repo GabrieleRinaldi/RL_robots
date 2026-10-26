@@ -4,11 +4,10 @@ Motion control policy for the Unitree B1 quadruped, trained with reinforcement l
 
 The registered task is `GaitScoreBo-Velocity-B1`.
 
-Follow the guides in `GAIT_SCORE_BO/docs/` in this order:
+First install Isaac Lab following the [installation guide](https://github.com/GabrieleRinaldi/RL_robots/blob/main/installation/IsaacLab.md) in the `main` branch. Then follow the guides in `GAIT_SCORE_BO/docs/` in this order:
 
-1. `00_IsaacLab_Installation.md`: install Isaac Lab
-2. `01_clone_project.md`: clone and register the project
-3. `02_training_seed.md`: train the seed model
-4. `03_training_default_continued.md`: continue the seed with the default weights
-5. `04_training_BO.md`: optimize the reward weights
-6. `05_evaluation.md`: evaluate the models and plot the results
+1. `01_clone_project.md`: clone and register the project
+2. `02_training_seed.md`: train the seed model
+3. `03_training_default_continued.md`: continue the seed with the default weights
+4. `04_training_BO.md`: optimize the reward weights
+5. `05_evaluation.md`: evaluate the models and plot the results
